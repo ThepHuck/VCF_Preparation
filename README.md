@@ -19,7 +19,7 @@ This script is needed if you've reinstalled ESXi without properly leaving a vSAN
 
 You may need to edit the command to meet your needs for the disks.  The servers this was written for has the OS on M.2 drives, NVMe cache disks, and SAS capacity disks.
 
-## VCF host prep
+## VCF set host config
 
 This script sets some of the required configuration for VCF:
 - Optionally sets the hostname fqdn to the name supplied in the array, uncomment the three lines to set host fqdn (this is needed if the hostname is still localhost from a manual install)
