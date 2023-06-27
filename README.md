@@ -18,7 +18,7 @@ It stops all running VMs and removes from inventory.  This is useful in case you
 
 This script is needed if you've reinstalled ESXi without properly leaving a vSAN cluster or deleting the vSAN disk group from the ESXi host and vSAN partitions are left on the disks.
 
-You may need to edit the command to meet your needs for the disks.  The Lenovo servers this was written for has the OS on M.2 drives, NVMe cache disks, and SAS capacity disks.
+You may need to edit the command to meet your needs for the disks.  The servers this was written for has the OS on M.2 drives, NVMe cache disks, and SAS capacity disks.
 
 ## VCF host prep
 
