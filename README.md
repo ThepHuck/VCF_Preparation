@@ -7,7 +7,7 @@ These scripts help with prepping & redeploying VCF.  **PowerCLI** is needed for 
 
 
 
-## VCF host wipe
+## Leave vSAN
 **Use this script before reinstall of ESXi**
 
 This is a simple script you can copy & paste into a terminal to force the host to leave the vSAN cluster, and then delete all disk groups.
