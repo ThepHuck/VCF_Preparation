@@ -10,8 +10,7 @@ These scripts help with prepping & redeploying VCF.  **PowerCLI** is needed for 
 ## Leave vSAN
 **Use this script before reinstall of ESXi**
 
-This is a simple script you can copy & paste into a terminal to force the host to leave the vSAN cluster, and then delete all disk groups.
-It stops all running VMs and removes from inventory.  This is useful in case you have the cloud builder VM on a local datastore with snapshots.  After you reinstall ESXi, you can import the VMX file and restore from snapshot.
+This script forces the host to leave the vSAN cluster, and then delete all disk groups. It stops all running VMs and removes from inventory. This is useful in case you have the cloud builder VM on a local datastore with snapshots. After you reinstall ESXi, you can import the VMX file and restore from snapshot.
 
 ## Wipe partitions
 **Use this script if vSAN was not wiped before reinstall of ESXi**
@@ -22,7 +21,7 @@ You may need to edit the command to meet your needs for the disks.  The servers 
 
 ## VCF host prep
 
-This is a simple script you can copy & paste into a terminal to set some of the required configuration for VCF.
+This script sets some of the required configuration for VCF:
 - Optionally sets the hostname fqdn to the name supplied in the array, uncomment the three lines to set host fqdn (this is needed if the hostname is still localhost from a manual install)
 - Sets DNS servers, network domain name & search domains
 - Adds NTP server
