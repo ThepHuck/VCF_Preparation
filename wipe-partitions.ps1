@@ -21,7 +21,7 @@ foreach ($i in $vmhosts){
     Get-VmHostService | Where-Object {$_.key -match "TSM-SSH"} | Set-VMHostService -Policy "on" -confirm:$false | Start-VMHostService -confirm:$false
 
     # removes a stored key for the host if the OS has been reinstalled after first SSH session
-    Get-SSHTrustedHost | ? {$_.HostName -match $vmhosts[0]} | Remove-SSHTrustedHost -ErrorAction SilentlyContinue
+    Get-SSHTrustedHost | ? {$_.HostName -match $i} | Remove-SSHTrustedHost -ErrorAction SilentlyContinue
     
     write-host -fore green `n`t "SSHing into $i"
     # Create a new SSH session
