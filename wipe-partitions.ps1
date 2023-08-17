@@ -19,6 +19,7 @@ foreach ($i in $vmhosts){
     # SSH is disabled by default
     write-host -fore green `n`t "Enabling SSH"
     Get-VmHostService | Where-Object {$_.key -match "TSM-SSH"} | Set-VMHostService -Policy "on" -confirm:$false | Start-VMHostService -confirm:$false
+    disconnect-viserver $i -confirm:$false
 
     # removes a stored key for the host if the OS has been reinstalled after first SSH session
     Get-SSHTrustedHost | ? {$_.HostName -match $i} | Remove-SSHTrustedHost -ErrorAction SilentlyContinue
@@ -34,6 +35,7 @@ foreach ($i in $vmhosts){
     # run the ssh command for mpx
     write-host -fore green `n`t "Clearing SAS/SATA"
     Invoke-SSHCommand -SessionId $ssh.SessionId -Command $cmdmpx -TimeOut 30
+    
     Remove-SSHSession -SessionId $ssh.SessionId
 
     Write-Host -fore green `n`t "thank you, next"
