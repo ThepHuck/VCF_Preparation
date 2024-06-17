@@ -28,3 +28,19 @@ This script sets some of the required configuration for VCF:
 - Enables & starts ssh 
 - Enables & starts ntpd
 - Regenerates certificates & reboots
+
+## Generate JSON
+**Use this script to send a completed XLSX spreadseet to an existing CloudBuilder appliance to generate a JSON file**
+
+**posh-ssh** is required
+
+First edition, no CLI args, you must edit the variables in the script before running.  There's no real try/catch, it will continue on error.
+
+Here's what it does:
+ - ssh's into CloudBuilder appliance
+ - deletes any existing generated json files (the generate will prompt to overwrite, which we're not connected interactively to say yes)
+ - SCPs .xlsx file to admin's home directory
+ - uses SOS to generate .json file
+ - moves .json file to admin's home directory
+ - changes file ownership to admin:vcf
+ - SCPs .json file from admin's home
