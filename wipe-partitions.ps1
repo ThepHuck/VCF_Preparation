@@ -8,7 +8,7 @@ $cmdNVMe = "for disk in `$(ls /vmfs/devices/disks | grep NVMe | grep -v :); do p
 $cmdmpx = "for disk in `$(ls /vmfs/devices/disks | grep mpx | grep -E '^([^:]*:){3}[^:]*$'); do partedUtil setptbl /vmfs/devices/disks/`$disk msdos; done"
 
 $user = "root"
-$password = "VMware@1234!"
+$password = "notMyP@ssw0rd!"
 $password = ConvertTo-SecureString -String $password -AsPlainText -Force
 $creds = New-Object System.Management.Automation.PSCredential($user,$password)
 
