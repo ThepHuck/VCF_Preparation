@@ -4,14 +4,22 @@ $password = "notMyP@ssw0rd!"
 $password = ConvertTo-SecureString -String $password -AsPlainText -Force
 $creds = New-Object System.Management.Automation.PSCredential($user,$password)
 
-foreach ($i in $vmhosts){
+Set-PowerCLIConfiguration -DefaultVIServerMode Multiple -Confirm:$false
 
+foreach ($i in $vmhosts){
     write-host -fore green `n`t "Connecting to $i"
     connect-viserver $i -credential $creds
+}
 
-    write-host -fore green `n`t "Stopping all VMs"
-    get-vm | stop-vm -kill -confirm:$false -ErrorAction SilentlyContinue  | remove-vm -confirm:$false -ErrorAction SilentlyContinue
+write-host -fore green `n`t "Killing all VMs"
+get-vm | select Name
+get-vm | stop-vm -confirm:$false -ErrorAction SilentlyContinue -RunAsync
+get-vm remove-vm -DeletePermanently -confirm:$false -ErrorAction SilentlyContinue -RunAsync
+disconnect-viserver * -confirm:$false
 
+foreach ($i in $vmhosts){
+    write-host -fore green `n`t "Connecting to $i"
+    connect-viserver $i -credential $creds
     write-host -fore green `n`t "Leaving vSAN cluster and deleting vSAN disk groups"
     $esxcli = get-esxcli -v2
     $esxcli.vsan.cluster.leave.Invoke()
