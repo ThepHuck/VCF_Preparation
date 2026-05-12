@@ -5,10 +5,7 @@ $dns1 = "8.8.8.8"
 $dns2 = "8.8.4.4"
 $dnsSearch = "home.lab"
 $cmd = "/sbin/generate-certificates && reboot"
-$user = "root"
-$password = "notMyP@ssw0rd!"
-$password = ConvertTo-SecureString -String $password -AsPlainText -Force
-$creds = New-Object System.Management.Automation.PSCredential($user,$password)
+$creds = get-credential
 
 foreach ($i in $vmhosts){
     write-host -fore green `n`t "Connecting to $i"   
