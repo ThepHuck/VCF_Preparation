@@ -31,8 +31,7 @@ foreach ($i in $vmhosts){
     Get-VmHostService | Where-Object {$_.key -match "ntpd"} | Set-VMHostService -Policy "on" -confirm:$false | Start-VMHostService -confirm:$false
 
     write-host -fore green `n`t "SSHing into the host to regenerate certificates & reboot"
-    Get-SSHTrustedHost | ? {$_.HostName -match $i} | Remove-SSHTrustedHost
-    $ssh = New-SSHSession -computername $i -credential $creds -AcceptKey -KeepAliveInterval 5 -Verbose
+    $ssh = New-SSHSession -computername $i -credential $creds -Force -KeepAliveInterval 5 -Verbose -WarningAction SilentlyContinue
     Invoke-SSHCommand -SessionId $ssh.SessionId -Command $cmd -TimeOut 30
     Remove-SSHSession -SessionId $ssh.SessionId
 
